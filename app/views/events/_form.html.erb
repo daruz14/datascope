@@ -32,6 +32,11 @@
   </div>
 
   <div>
+    <%= form.label :users, 'Asistentes' %>
+    <%= form.collection_select(:user_ids, @users || [], :id, :email, {}, { multiple: true }) %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
