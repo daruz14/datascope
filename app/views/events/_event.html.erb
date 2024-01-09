@@ -1,22 +1,24 @@
 <div id="<%= dom_id event %>">
   <p>
-    <strong>Title:</strong>
+    <strong>Titulo:</strong>
     <%= event.title %>
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <strong>Descripción:</strong>
     <%= event.description %>
   </p>
 
   <p>
-    <strong>Start date:</strong>
-    <%= event.start_date %>
+    <strong>Fecha:</strong>
+    <%= "#{event.start_date} - #{event.end_date}"%>
   </p>
 
   <p>
-    <strong>End date:</strong>
-    <%= event.end_date %>
+    <strong>Participantes:</strong>
+    <% event.users.each do |user| %>
+      <li><%= user.email %></li>
+    <% end %>
   </p>
 
 </div>

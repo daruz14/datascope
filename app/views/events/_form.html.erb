@@ -33,7 +33,7 @@
 
   <div>
     <%= form.label :users, 'Asistentes' %>
-    <%= form.collection_select(:user_ids, @users || [], :id, :email, {}, { multiple: true }) %>
+    <%= form.collection_select(:user_ids, @colleagues || [], :id, :email, {}, { multiple: true }) %>
   </div>
 
   <div>

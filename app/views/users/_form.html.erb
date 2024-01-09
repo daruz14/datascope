@@ -27,6 +27,11 @@
   </div>
 
   <div>
+    <%= form.label :company_id %>
+    <%= form.collection_select :company_id, Company.all, :id, :name, prompt: true %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

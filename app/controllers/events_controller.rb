@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = current_user.company ? Event.in_same_company_as(current_user) : current+user.events
   end
 
   # GET /events/1 or /events/1.json
@@ -14,11 +14,14 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @users = User.all
+    @user = current_user
+    @colleagues = @user.company.users.where.not(id: @user.id)
   end
 
   # GET /events/1/edit
   def edit
+    @user = current_user
+    @colleagues = @user.company.users.where.not(id: @user.id)
   end
 
   # POST /events or /events.json
@@ -67,6 +70,11 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:title, :description, :start_date, :end_date, user_ids: [])
+      params.require(:event).permit(:title, :start_date, :end_date, user_ids: [])
+        .tap do |event_params|
+        if current_user && !event_params[:user_ids].include?(current_user.id)
+          event_params[:user_ids] << current_user.id
+        end
+      end
     end
 end
