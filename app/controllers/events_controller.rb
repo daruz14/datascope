@@ -107,12 +107,17 @@ class EventsController < ApplicationController
       api_key = ENV.fetch('OPENWEATHER_APIKEY', '')
       response = HTTParty.get("https://api.openweathermap.org/data/2.5/weather?lat=#{@event.latitude}&lon=#{@event.longitude}&appid=#{api_key}&units=metric")
 
-      weather_data = JSON.parse(response.body)
-      return {
-        main: weather_data['weather'][0]['main'],
-        min: weather_data['main']['temp_min'],
-        max: weather_data['main']['temp_max'],
-        current: weather_data['main']['temp']
-      }
+      if response.code == 200
+        weather_data = JSON.parse(response.body)
+        return {
+          main: weather_data['weather'][0]['main'],
+          min: weather_data['main']['temp_min'],
+          max: weather_data['main']['temp_max'],
+          current: weather_data['main']['temp']
+        }
+      else
+        puts "Error en la request a la API con código: #{response.code}"
+        return
+      end
     end
 end
