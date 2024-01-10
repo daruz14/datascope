@@ -12,6 +12,12 @@ class UsersController < ApplicationController
   def show
   end
 
+  def profile
+    @user = current_user
+    @events = @user.events.today
+    @colleagues = @user.company ? @user.company.users.where.not(id: @user.id) : []
+  end
+
   # GET /users/new
   def new
     @user = User.new

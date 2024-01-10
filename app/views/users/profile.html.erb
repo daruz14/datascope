@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<div style="display: flex; align-items: baseline; gap: 10px">
+  <h1>Agenda de <%= @user.name %></h1>
+  <%= link_to "Editar Perfil", edit_user_path(@user) %>
+</div>
+
+
+<p><strong>Email:</strong> <%= @user.email %></p>
+
+<h2>Eventos para hoy:</h2>
+<% if @events.present? %>
+  <ul>
+    <% @events.each do |event| %>
+      <li><%= link_to "#{event.title} Inicio: #{event.start_date}", event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay eventos.</p>
+<% end %>
+
+<h2>Compañeros de Trabajo:</h2>
+<% if @colleagues.present? %>
+  <ul>
+    <% @colleagues.each do |colleague| %>
+      <li><%= link_to "#{colleague.name} - #{colleague.email}", user_path(colleague) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay compañeros.</p>
+<% end %>
+
