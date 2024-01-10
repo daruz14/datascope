@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :users, through: :attendances
   validate :no_overlapping_events, on: :create
   validate :end_date_after_start_date, on: :create
+  geocoded_by :address
 
   scope :in_same_company_as, ->(user) {
     joins(:users).where(users: { company: user.company }).distinct
