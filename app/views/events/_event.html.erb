@@ -21,4 +21,16 @@
     <% end %>
   </p>
 
+  <div>
+    <h3>Información meteorológica</h2>
+    <%if @weather %>
+      <p>Tiempo: <%= @weather[:main] %></p>
+      <p>Temperatura: <%= @weather[:current] %> °C</p>
+      <p>Mínima: <%= @weather[:min] %> °C</p>
+      <p>Máxima: <%= @weather[:max] %> °C</p>
+    <%else%>
+      <p>¡El día de tu reunión te informaremos del tiempo en la dirección indicada!</p>
+    <%end%>
+  </div>
+
 </div>
