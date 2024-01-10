@@ -1,10 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
+<h1>Agenda de <%= @user.name %></h1>
+
 <%= render @user %>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+<h1>Eventos de <%= @user.name %> hoy:</h1>
+<% if @events.present? %>
+  <ul>
+    <% @events.each do |event| %>
+      <li><%= link_to "#{event.title} - Inicio: #{event.start_date}", event_path(event) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay eventos.</p>
+<% end %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+<div>
+  <% if user_signed_in? && current_user == @user %>
+    <%= link_to "Edit this user", edit_user_path(@user) %>
+  <% end %>
 </div>
