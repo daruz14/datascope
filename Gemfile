@@ -43,7 +43,9 @@ gem "bootsnap", require: false
 
 gem "devise"
 
-gem 'httparty'
+gem "httparty", "~> 0.21.0"
+
+gem "geocoder", "~> 1.8"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
