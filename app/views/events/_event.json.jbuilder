@@ -1,2 +1,3 @@
-json.extract! event, :id, :title, :description, :start_date, :end_date, :created_at, :updated_at
+json.extract! event, :id, :title, :description, :start_date, :end_date, :address
+json.participants event.users.map { |user| { email: user.email, name: user.name, lastname: user.lastname } }
 json.url event_url(event, format: :json)
