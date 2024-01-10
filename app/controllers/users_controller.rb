@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @events = @user.events
+    @events = @user.events.from_today
   end
 
   def profile

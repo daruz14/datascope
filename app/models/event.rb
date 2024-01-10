@@ -7,4 +7,6 @@ class Event < ApplicationRecord
   }
 
   scope :today, -> { where('start_date >= ? AND start_date <= ?', Time.zone.now.beginning_of_day, Time.zone.now.end_of_day).order(start_date: :asc) }
+
+  scope :from_today, -> { where('start_date >= ?', Time.zone.now.beginning_of_day).order(start_date: :asc) }
 end
