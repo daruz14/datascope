@@ -30,6 +30,10 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
+    if @event.address
+      @event.geocode
+    end
+
     respond_to do |format|
       if @event.save
 
